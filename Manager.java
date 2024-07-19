@@ -1,32 +1,26 @@
-public class Manager extends Client{
-    
-    private String managerId;
-    private String managerPassword;
-    private boolean haveManager;
+import java.util.HashMap;
+import java.util.Map;
 
-    public void setManager(String managerId) {
-        this.managerId = managerId;
+public class Manager {
+    private Map<String, Account> accounts;
+
+    public Manager() {
+        accounts = new HashMap<>();
     }
 
-    public String getManagerId() {
-        return managerId;
+    public Account createAccount(String accountNumber, String ownerName, String password) {
+        if (!accounts.containsKey(accountNumber)) {
+            Account newAccount = new Account(accountNumber, ownerName, password);
+            accounts.put(accountNumber, newAccount);
+            System.out.println("Account created successfully.");
+            return newAccount;
+        } else {
+            System.out.println("Account number already exists.");
+            return null;
+        }
     }
 
-    public String getManagerPassword() {
-        return managerPassword;
+    public Account getAccount(String accountNumber) {
+        return accounts.get(accountNumber);
     }
-
-    public void setHaveManager(Boolean haveManager) {
-        this.haveManager = haveManager;
-    }
-
-    public boolean getHaveManager() {
-        return haveManager;
-    }
-
-    public void setAccount(String id, String pin) {
-        this.managerId = id;
-        this.managerPassword = pin;
-    }
-
 }
