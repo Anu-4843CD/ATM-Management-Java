@@ -1,83 +1,43 @@
-import java.util.Scanner;
+public class Account {
+    private String accountNumber;
+    private String ownerName;
+    private double balance;
+    private String password;
 
-public class Account extends Client {
-    Manager[] 
-    manager = new Manager[1];
-    private String accountPin;
-    private String accountId;
-    private String accountName;
-    private int accountBalance;
-    private boolean accountInfo;
-    private boolean accountManager;
-    private String accountManagerId;
-    private boolean isManager = false;
-
-
-    public Account(String accountName, String accountId, String accountPin, int accountBalance) {
-        this.accountPin = accountPin;
-        this.accountId = accountId;
-        this.accountName = accountName;
-        this.accountBalance = accountBalance;
+    public Account(String accountNumber, String ownerName, String password) {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.password = password;
+        this.balance = 0.0;
     }
 
-    public String getAccountPin() {
-        return accountPin;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public double getBalance() {
+        return balance;
     }
 
-    public int getAccountBalance() {
-        return accountBalance;
+    public boolean authenticate(String password) {
+        return this.password.equals(password);
     }
 
-    public boolean getaccountInfo() {
-        return accountInfo;
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
     }
 
-    public boolean getAccountManager() {
-        return accountManager;
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
-    
-
-    public void setAccountBalance(int balance) {
-        this.accountBalance = balance;
-    }
-
-    public void setaccountInfo(boolean accountInfo) {
-        this.accountInfo = accountInfo;
-    }
-
-    public void setManager(String managerId) {
- 
-        Scanner inputAccountId = new Scanner(System.in);
-        manager[0] = new Manager();
-        manager[0].setManager(managerId);
-        manager[0].setHaveManager(true); 
-        manager[0].setAccount(accountId, accountPin);
-        this.isManager = true;
-        this.accountManager = true;
-        System.out.println("Manager ID : " + manager[0].getManagerId());
-    }
-
-    public void getManagerInformation() {
-        System.out.println("Manager ID: " + manager[0].getManagerId());
-        System.out.println("Manager Password: " + manager[0].getManagerId());
-        System.out.println("Have Manager: " + manager[0].getManagerId());
-    }
-
-    public String getManagerId() {
-        return manager[0].getManagerId();
-    }
-
-    public boolean getIsManager() {
-        return isManager;
-    }
-
 }
-
