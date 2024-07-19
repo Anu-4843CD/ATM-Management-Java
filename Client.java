@@ -1,30 +1,24 @@
-class Person{
+public class Client {
+    private Account account;
 
-    private String firstName;
-    private String lastName;
-    private String idCard;
-    private String gender;
-
-    public void setAccount(String firstName, String lastName, String idCard, String gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idCard = idCard;
-        this.gender = gender;
-    }
-    
-    public String getAccountFirstName() {
-        return firstName;
+    public Client(Account account) {
+        this.account = account;
     }
 
-    public String getAccountLastName() {
-        return lastName;
+    public void deposit(double amount) {
+        account.deposit(amount);
+        System.out.println("Deposited: " + amount);
     }
 
-    public String getAccountIdCard(){
-        return idCard;
+    public void withdraw(double amount) {
+        if (account.withdraw(amount)) {
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
     }
 
-    public String getAccountGender(){
-        return gender;
+    public void checkBalance() {
+        System.out.println("Current balance: " + account.getBalance());
     }
 }
